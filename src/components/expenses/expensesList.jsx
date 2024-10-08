@@ -1,48 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 const ExpensesList = () => {
-  const [expenses, setExpenses] = useState([]);
+  const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchExpenses = async () => {
-      const token = localStorage.getItem('token');
-      const res = await axios.get('/api/expenses', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      setExpenses(res.data);
-    };
+  // Handle navigation to the edit expense page
+  const handleEdit = (id) => {
+    navigate(`/edit-expense/${id}`); // Navigate to edit route with expense ID
+  };
 
-    fetchExpenses();
-  }, []);
-
+  const handleDelete = (index) => {
+    const updatedExpenses = expenses.filter((_, i) => i !== index);
+    localStorage.setItem('expenses', JSON.stringify(updatedExpenses));
+    setExpenses(updatedExpenses);
+    toast.success('Expense deleted!');
+  };
   return (
     <div className="expenses-list">
-      <div class="container pt-5 ">
-        <div class="row justify-content-center">
-          <div class="col-12 col-md-6 col-lg-5 bg-light p-4 w-100">
+      <div className="container pt-5 ">
+        <div className="row justify-content-center">
+          <div className="col-12 col-md-6 col-lg-5 bg-light p-4 w-100">
             <div className="h2 text-center">Your Expenses</div>
-            <p>Amount: $ </p>
-          <p>Date: </p>
+            <ul className="list-group">
+              {expenses.map((expense, index) => (
+                <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                  <div className="row">
+                    <div className="text-success h5">{expense.title}</div>
+                    <div className=""><span className="fw-bold">Amount:</span> ${expense.amount}</div>
+                    <div className=""><span className="fw-bold">Date:</span> {expense.date}</div>
+                  </div>
 
-          <a href="/update-Expense"><button type="button" class="btn btn-outline-primary">Edit</button></a>
-          <button type="button" class="btn btn-outline-danger">Delete</button>
-           
+                  <div>
+                    <button className="btn btn-warning btn-sm mx-2" onClick={() => handleEdit(expense.id) }>Edit</button>
+                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(index)}>Delete</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p className="text-center pt-4">
+              <a href="/home">Go back to Welcome Page</a>
+            </p>
           </div>
         </div>
       </div>
-      
-      {/* {expenses.map((expense) => (
-        <div key={expense._id} className="expense-item">
-          <h3>{expense.title} </h3>
-          <p>Amount: ${expense.amount} </p>
-          <p>Date: {expense.date}</p>
-          <button type="button" class="btn btn-outline-primary"><a href="/add-expense"></a>Edit</button>
-          <button type="button" class="btn btn-outline-danger">Delete</button>
-        </div>
-      ))} */}
     </div>
   );
 };

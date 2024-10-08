@@ -9,7 +9,11 @@ function home() {
                     <h3>Welcome to Expense Tracker</h3>
                     <Link className='text-success mx-3 text-decoration-none font-extrabold' to="/add-expense">Add Expense</Link>
                     <Link className='text-success mx-3 text-decoration-none font-extrabold' to="/expenses">Expense List</Link>
-                    <div className='fs-6 '>Manage and praticpate in polls with ease. Use the navigation links to create new polls or view and vote in existing ones</div>
+                    <div className="position-relative" style={{ height: '100px' }}> {/* Added height for positioning */}
+                        <small className="form-text text-muted position-absolute" style={{ bottom: '10px', left: '10px' }}>
+                            Track and manage your expense effectively. Use the navigation links to add new expenses or view your expense history.
+                        </small>
+                    </div>
                 </div>
             </div>
         </div>
