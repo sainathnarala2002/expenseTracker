@@ -1,13 +1,15 @@
-/* Remove the default focus outline from all input fields */
-input:focus, 
-textarea:focus {
+/* App.css */
+
+/* Remove background color and box-shadow on focus */
+input.form-control:focus, 
+textarea.form-control:focus {
+    background-color: transparent; /* Remove background color */
+    box-shadow: none; /* Remove any box-shadow */
     outline: none; /* Remove the default outline */
-    box-shadow: none; /* Remove any box-shadow if applicable */
 }
 
-/* Optional: Add a custom style for focused inputs */
-.custom-input:focus {
-    outline: none; /* Remove default outline */
-    border: 2px solid #007bff; /* Custom border color */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Optional box shadow */
+/* Optional: Set the border color on focus to Bootstrap primary */
+input.form-control:focus,
+textarea.form-control:focus {
+    border-color: #007bff; /* Change border color to Bootstrap primary color */
 }
