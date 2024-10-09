@@ -39,7 +39,7 @@ const Login = () => {
 
       <div className="container pt-5">
         <div className="row justify-content-center">
-          <div className="col-12 col-md-6 col-lg-5 bg-light p-4">
+          <div className="col-12 col-md-6 col-lg-5 shadow bg-white rounded p-4">
             <h2>Login Page</h2>
             <form onSubmit={handleSubmit}>
               <label htmlFor="username">Username: </label>

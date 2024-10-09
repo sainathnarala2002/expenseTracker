@@ -13,8 +13,8 @@ import Home from './pages/home';
 
 const App = () => {
   return (
-    <div>
-      <ToastContainer />
+    <div className='vh-100' style={{ backgroundColor: 'whitesmoke'}}>
+       <ToastContainer position="top-right" autoClose={2000} hideProgressBar />
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />

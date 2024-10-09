@@ -13,3 +13,9 @@ input.form-control:focus,
 textarea.form-control:focus {
     border-color: #007bff; /* Change border color to Bootstrap primary color */
 }
+
+#root {
+    height: 100vh;
+  }
+
+  

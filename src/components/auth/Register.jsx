@@ -74,8 +74,10 @@ const Register = () => {
     e.preventDefault();
     if (!validateForm()) return;
 
+
     // Store user in localStorage
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.removeItem('expenses');
     toast.success('Registration successful!');
     navigate('/');
   };
@@ -83,8 +85,8 @@ const Register = () => {
     <div className="auth-form">
       <div className="container pt-5">
         <div className="row justify-content-center">
-          <div className="col-12 col-md-6 col-lg-5 bg-light p-4">
-            <h2>Register</h2>
+          <div className="col-12 col-md-6 col-lg-5 shadow rounded bg-white p-4">
+            <h2>Registration</h2>
             <form onSubmit={handleSubmit}>
               <label htmlFor="username">Username:</label>
               <input
@@ -123,53 +125,53 @@ const Register = () => {
                   </span>
                 </div>
 
-              <small className="form-text text-muted">
-                Password must meet the following requirements:
-              </small>
-              <ul className="list-unstyled">
-                <li className={passwordValidity.minLength ? 'text-success' : 'text-danger'}>
-                  At least 8 characters long
-                </li>
-                <li className={passwordValidity.hasUppercase ? 'text-success' : 'text-danger'}>
-                  Contains at least one uppercase letter
-                </li>
-                <li className={passwordValidity.hasNumber ? 'text-success' : 'text-danger'}>
-                  Contains at least one number
-                </li>
-                <li className={passwordValidity.hasSpecialChar ? 'text-success' : 'text-danger'}>
-                  Contains at least one special character (!@#$%^&*)
-                </li>
-              </ul>
-          </div>
+                <small className="form-text text-muted">
+                  Password must meet the following requirements:
+                </small>
+                <ul className="list-unstyled">
+                  <li className={passwordValidity.minLength ? 'text-success' : 'text-danger'}>
+                    At least 8 characters long
+                  </li>
+                  <li className={passwordValidity.hasUppercase ? 'text-success' : 'text-danger'}>
+                    Contains at least one uppercase letter
+                  </li>
+                  <li className={passwordValidity.hasNumber ? 'text-success' : 'text-danger'}>
+                    Contains at least one number
+                  </li>
+                  <li className={passwordValidity.hasSpecialChar ? 'text-success' : 'text-danger'}>
+                    Contains at least one special character (!@#$%^&*)
+                  </li>
+                </ul>
+              </div>
 
-          <label htmlFor="email ">Email:</label>
-          <input
-            type="email"
-            name="email"
-            className="form-control mb-3"
-            value={user.email}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="fullName">Full Name:</label>
-          <input
-            type="text"
-            name="fullName"
-            className="form-control mb-3"
-            value={user.fullName}
-            onChange={handleChange}
-            required
-          />
+              <label htmlFor="email ">Email:</label>
+              <input
+                type="email"
+                name="email"
+                className="form-control mb-3"
+                value={user.email}
+                onChange={handleChange}
+                required
+              />
+              <label htmlFor="fullName">Full Name:</label>
+              <input
+                type="text"
+                name="fullName"
+                className="form-control mb-3"
+                value={user.fullName}
+                onChange={handleChange}
+                required
+              />
 
-          <div className="d-grid gap-2">
-            <button type="submit" className="btn btn-primary">Register</button>
+              <div className="d-grid gap-2">
+                <button type="submit" className="btn btn-primary">Register</button>
+              </div>
+            </form>
+            <p className="text-center pt-4">
+              <a href="/">Already have an account? Login here</a>
+            </p>
           </div>
-        </form>
-        <p className="text-center pt-4">
-          <a href="/">Already have an account? Login here</a>
-        </p>
-      </div>
-    </div>
+        </div>
       </div >
     </div >
   );
