@@ -72,35 +72,39 @@ const AddExpense = () => {
 
     return true;
   };
-
-  // Handle form submission
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     if (!validateForm()) return;
-
+  
     const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
-
+  
     // If ID exists, update the existing expense
     if (id) {
       const updatedExpenses = expenses.map(exp => (exp.id === id ? expense : exp));
       localStorage.setItem('expenses', JSON.stringify(updatedExpenses));
+      console.log('Expense updated:', expense); // Log updated expense
       toast.success('Expense updated successfully!');
     } else {
       // If no ID, add a new expense
       const newExpense = { ...expense, id: Date.now().toString() }; // Generate a unique ID
       expenses.push(newExpense);
       localStorage.setItem('expenses', JSON.stringify(expenses));
+      console.log('Expense added:', newExpense); // Log new expense
       toast.success('Expense added successfully!');
     }
 
-    navigate('/expenses'); // Redirect to the expense list page after adding/updating
+    setTimeout(() => {
+      navigate('/expenses'); 
+    }, 2000);
   };
+  
 
   return (
     <div>
       <div className="expense-form">
-      <ToastContainer position="top-right" autoClose={5000} hideProgressBar />
+      <ToastContainer position="top-right" autoClose={2000} hideProgressBar />
       <div class="d-flex justify-content-center align-items-center" >
         <div className="container mt-5 m-0 ">
           <div className="row justify-content-center">

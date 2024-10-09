@@ -4,7 +4,6 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const ExpensesList = () => {
   const [expenses, setExpenses] = useState([]);
-  // const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
   const navigate = useNavigate();
 
   useEffect(() => {

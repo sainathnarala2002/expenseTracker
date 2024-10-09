@@ -104,7 +104,7 @@ const Register = () => {
                     type={showPassword ? 'text' : 'password'} // Toggle between text and password
                     name="password"
                     className="form-control"
-                    placeholder="Enter your password"
+                    placeholder=""
                     value={user.password}
                     onChange={handleChange}
                     required
