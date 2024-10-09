@@ -10,6 +10,13 @@ const AddExpense = () => {
     description: ''
   });
 
+  const [errorMessages, setErrorMessages] = useState({
+    title: '',
+    amount: '',
+    date: '',
+    description: ''
+  });
+      
   const navigate = useNavigate();
   const { id } = useParams(); // Get the expense ID from the URL
 
@@ -34,6 +41,8 @@ const AddExpense = () => {
       ...expense,
       [name]: value
     });
+    // Clear error message for the changed field
+    setErrorMessages(prev => ({ ...prev, [name]: '' }));
   };
 
   // Validate expense form inputs
@@ -52,7 +61,6 @@ const AddExpense = () => {
       toast.error('Amount must be a positive number!');
       return false;
     }
-    
 
     if (isNaN(Date.parse(date))) {
       toast.error('Please enter a valid date!');
@@ -77,13 +85,13 @@ const AddExpense = () => {
     e.preventDefault(); // Prevent default validation message
     const { name } = e.target;
     if (name === 'title') {
-      toast.error('Please enter a title!');
+      setErrorMessages(prev => ({ ...prev, title: 'Please enter a title!' }));
     } else if (name === 'amount') {
-      toast.error('Please enter an amount!');
+      setErrorMessages(prev => ({ ...prev, amount: 'Please enter an Amount & must be a positive number!' }));
     } else if (name === 'date') {
-      toast.error('Please select a valid date!');
+      setErrorMessages(prev => ({ ...prev, date: 'Please select a valid date!' }));
     } else if (name === 'description') {
-      toast.error('Please enter a description!');
+      setErrorMessages(prev => ({ ...prev, description: 'Please enter a description!' }));
     }
   };
   
@@ -136,6 +144,8 @@ const AddExpense = () => {
                   onInvalid={handleInvalid}
                   required
                 />
+                {errorMessages.title && <div className="text-danger">{errorMessages.title}</div>}
+
                 <label htmlFor="amount">Amount:</label>
                 <input
                   type="number"
@@ -147,6 +157,8 @@ const AddExpense = () => {
                   onInvalid={handleInvalid}
                   required
                 />
+                {errorMessages.amount && <div className="text-danger">{errorMessages.amount}</div>}
+
                 <label htmlFor="date">Select Date:</label>
                 <input
                   type="date"
@@ -158,6 +170,8 @@ const AddExpense = () => {
                   onInvalid={handleInvalid}
                   required
                 />
+                {errorMessages.date && <div className="text-danger">{errorMessages.date}</div>}
+
                 <label htmlFor="description">Description:</label>
                 <textarea
                   id='description'
@@ -168,6 +182,8 @@ const AddExpense = () => {
                   className='w-100 mb-3'
                   required
                 />
+                {errorMessages.description && <div className="text-danger">{errorMessages.description}</div>}
+
                 <div className="d-grid gap-1">
                   <button type="submit" className="btn btn-success">{id ? 'Update Expense' : 'Add Expense'}</button>
                 </div>
