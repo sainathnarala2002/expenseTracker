@@ -72,6 +72,20 @@ const AddExpense = () => {
 
     return true;
   };
+
+  const handleInvalid = (e) => {
+    e.preventDefault(); // Prevent default validation message
+    const { name } = e.target;
+    if (name === 'title') {
+      toast.error('Please enter a title!');
+    } else if (name === 'amount') {
+      toast.error('Please enter an amount!');
+    } else if (name === 'date') {
+      toast.error('Please select a valid date!');
+    } else if (name === 'description') {
+      toast.error('Please enter a description!');
+    }
+  };
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -119,6 +133,7 @@ const AddExpense = () => {
                   id="expenseName"
                   value={expense.title}
                   onChange={handleChange}
+                  onInvalid={handleInvalid}
                   required
                 />
                 <label htmlFor="amount">Amount:</label>
@@ -129,6 +144,7 @@ const AddExpense = () => {
                   id="amount"
                   value={expense.amount}
                   onChange={handleChange}
+                  onInvalid={handleInvalid}
                   required
                 />
                 <label htmlFor="date">Select Date:</label>
@@ -139,6 +155,7 @@ const AddExpense = () => {
                   id="date"
                   value={expense.date}
                   onChange={handleChange}
+                  onInvalid={handleInvalid}
                   required
                 />
                 <label htmlFor="description">Description:</label>
@@ -147,6 +164,7 @@ const AddExpense = () => {
                   name="description"
                   value={expense.description}
                   onChange={handleChange}
+                  onInvalid={handleInvalid}
                   className='w-100 mb-3'
                   required
                 />
