@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function home() {
     return (
-        <div class="d-flex justify-content-center align-items-center" >
+        <div className="d-flex justify-content-center align-items-center" >
             <div className="container pt-2 m-0 w-100">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-8 col-lg-4 shadow text-center bg-white rounded p-2 w-100">
